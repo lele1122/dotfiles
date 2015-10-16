@@ -1,0 +1,93 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'mbbill/undotree'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'matchit.zip'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:/Users/Jiahao/.vim/bundle/vim-latex'
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+
+"set the runtimepath
+set runtimepath+=~/.vim
+
+"syntax high light  
+syntax on  
+"show the line number  
+set nu  
+"let the tabstop equal 4  
+set tabstop=4  
+"set the autoindent on  
+set autoindent  
+"set smart indent
+set smartindent
+
+"highlight the current line
+autocmd InsertLeave * se nocul
+autocmd InsertEnter * se cul
+
+"set the match time is one tenth second  
+set matchtime=1  
+"high light the search  
+set hlsearch  
+"set the c language indent format   
+set cindent  
+"set the indent width  
+set shiftwidth=4  
+"set show status on  
+set ruler  
+"set show mode on  
+set showmode  
+"show confirm window when not saved
+set confirm
+
+"set windows transparency
+"set transparency=10
+
+"set the font
+set guifont=Source_Code_Pro:h15
+"supports 256 color
+set t_Co=256
+
+"NERDTree setup
+map  :silent! NERDTreeToggle
+let NERDTreeWinPos="right"
