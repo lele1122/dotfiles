@@ -1,65 +1,81 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'mbbill/undotree'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'matchit.zip'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:/Users/Jiahao/.vim/bundle/vim-latex'
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
+" Notes {
+" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"   Joe's vimrc
 "
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" }
 
+" Load Plugins by Vundle { 
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
 
-"set the runtimepath
-set runtimepath+=~/.vim
+    " set the runtime path to include Vundle and initialize
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    " alternatively, pass a path where Vundle should install plugins
+    "call vundle#begin('~/some/path/here')
 
-"syntax high light  
-syntax on  
-"show the line number  
-set nu  
-"let the tabstop equal 4  
-set tabstop=4  
-"set the autoindent on  
-set autoindent  
-"set smart indent
-set smartindent
+    " let Vundle manage Vundle, required
+    Plugin 'VundleVim/Vundle.vim'
+
+    " The following are examples of different formats supported.
+    " Keep Plugin commands between vundle#begin/end.
+    " plugin on GitHub repo
+    Plugin 'tpope/vim-fugitive'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'kien/ctrlp.vim' "fuzzy search files
+    Plugin 'majutsushi/tagbar'
+    Plugin 'mbbill/undotree'
+    "Plugin 'Lokaltog/vim-powerline'
+    Plugin 'bling/vim-airline'
+    Plugin 'sirver/ultisnips'
+    Plugin 'scrooloose/nerdcommenter'
+    Plugin 'godlygeek/tabular'
+    " plugin from http://vim-scripts.org/vim/scripts.html
+    Plugin 'matchit.zip'
+    " Git plugin not hosted on GitHub
+    Plugin 'git://git.wincent.com/command-t.git'
+    Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+    " git repos on your local machine (i.e. when working on your own plugin)
+    "Plugin 'file:/Users/Jiahao/.vim/bundle/vim-latex'
+    "Plugin 'file:///home/gmarik/path/to/plugin'
+    " The sparkup vim script is in a subdirectory of this repo called vim.
+    " Pass the path to set the runtimepath properly.
+    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    " Avoid a name conflict with L9
+    "Plugin 'user/L9', {'name': 'newL9'}
+
+    " All of your Plugins must be added before the following line
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    " To ignore plugin indent changes, instead use:
+    "filetype plugin on
+    "
+    " Brief help
+    " :PluginList       - lists configured plugins
+    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+    "
+    " see :h vundle for more details or wiki for FAQ
+    " Put your non-Plugin stuff after this line
+" }
+
+" Environment {
+    "set the runtimepath
+    set runtimepath+=~/.vim
+" }
+
+" General {
+    
+    set background=dark     " Assume a dark background
+    syntax on               " Syntax highlighting
+    set mouse=a             " Enable mouse
+    set mousehide           " Hide the mouse cursor while typing
+    scriptencoding uif-8
+    set virtualedit=onemore             " Allow for cursor beyond last character
+    set history=1000                    " Store a ton of history (default is 20)
+    set spell                           " Spell checking on
 
 "highlight the current line
 autocmd InsertLeave * se nocul
@@ -67,27 +83,107 @@ autocmd InsertEnter * se cul
 
 "set the match time is one tenth second  
 set matchtime=1  
-"high light the search  
-set hlsearch  
-"set the c language indent format   
-set cindent  
-"set the indent width  
-set shiftwidth=4  
-"set show status on  
-set ruler  
-"set show mode on  
-set showmode  
-"show confirm window when not saved
-set confirm
 
-"set windows transparency
-"set transparency=10
 
-"set the font
-set guifont=Source_Code_Pro:h15
-"supports 256 color
-set t_Co=256
 
-"NERDTree setup
-map  :silent! NERDTreeToggle
-let NERDTreeWinPos="right"
+" }
+
+" Vim UI {
+
+    set tabpagemax=15               " Only show 15 tabs
+    set showmode                    " Display the current mode
+    set cursorline                  " Highlight current line
+    set transparency=10             " Set windows transparency
+    set guifont=Source_Code_Pro_for_Powerline:h15       " Set the font
+    set t_Co=256                    " Set the 256 color
+    "let g:molokai_original = 1	"original monokai background color
+    set hlsearch                    " Highlight search terms
+    set scrolloff=3                 " Minimum lines to keep above and below cursor
+    set showmode                    " Display the current mode
+    set confirm                     " Show confirm window when not saved
+    set showmatch                   " Show matching brackets/parenthesis
+    set ignorecase                  " Case insensitive search
+    set smartcase                   " Case sensitive when uc present
+    set wildmenu                    " Show list instead of just completing
+    set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
+    set foldenable                  " Auto fold code
+
+" }
+
+" Formatting {
+
+    "set nowrap                      " Do not wrap long lines
+	set linebreak					" Wrap by words instead of characters
+    set autoindent                  " Indent at the same level of the previous line
+	set smartindent					" Smard indent
+	set cindent  					" Set the c language indent format  
+    set shiftwidth=4                " Use indents of 4 spaces
+    set tabstop=4                   " An indentation every four columns
+    set softtabstop=4               " Let backspace delete indent
+    set splitright                  " Puts new vsplit windows to the right of the current
+    set splitbelow                  " Puts new split windows to the bottom of the current
+	set number  					" Show the line number  
+	set ruler						" Set show status on  
+ 
+" }
+
+" Key (re)Mappings {
+	
+	let mapleader=","
+	nmap <leader>nt :NERDTree<CR>
+	nmap <leader>cp :CtrlP<CR>
+	nmap <leader>tb :TagbarToggle<CR>	
+	nmap <space> za
+
+	" Latex related {
+	map <f2> :w<cr><leader>ll
+	imap <C-b> <Plug>Tex_MathBF
+	imap <C-c> <Plug>Tex_MathCal
+	imap <C-l> <Plug>Tex_LeftRight
+	imap <leader>it <Plug>Tex_InsertItemOnThisLine
+    " }
+
+" }
+
+" Plugins {
+
+	" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+	let g:UltiSnipsExpandTrigger="<tab>"
+	let g:UltiSnipsJumpForwardTrigger="<c-b>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+	" If you want :UltiSnipsEdit to split your window.
+	let g:UltiSnipsEditSplit="vertical"
+
+	"NERDTree setup
+	let NERDTreeWinPos="right"
+
+	" Powerline
+	"let g:Powerline_symbols = 'fancy'
+
+	" Airline
+	set laststatus=2						" Show statusline all the time
+	let g:airline_powerline_fonts = 1		" Use powerline symbols
+
+	" Latex-suite
+	" IMPORTANT: grep will sometimes skip displaying the file name if you
+	" search in a singe file. This will confuse Latex-Suite. Set your grep
+	" program to always generate a file-name.
+	set grepprg=grep\ -nH\ $*
+	" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+	" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+	" The following changes the default filetype back to 'tex':
+	let g:tex_flavor='latex'
+	" Change default target to pdf, if not dvi is used
+	let g:Tex_DefaultTargetFormat = 'pdf'
+	" Setup the compile rule for pdf to use pdflatex with synctex enabled
+	let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*' 
+	" PDF display rule
+	let g:Tex_ViewRule_pdf = 'open -a Skim'	
+	set <m-i>=^[i
+	" IMAP()
+	"augroup MyIMAPs
+		"au!
+		   "au VimEnter * call IMAP('NOM', '\nomenclature{<++>}<++>', 'tex')
+	"augroup END
+" }
