@@ -21,27 +21,30 @@
     " The following are examples of different formats supported.
     " Keep Plugin commands between vundle#begin/end.
     " plugin on GitHub repo
+    Plugin 'kien/ctrlp.vim' "fuzzy search files
+    Plugin 'mbbill/undotree'
+    Plugin 'sirver/ultisnips'
+    Plugin 'majutsushi/tagbar'
+    Plugin 'godlygeek/tabular'
+    Plugin 'bling/vim-airline'
+    Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-fugitive'
     Plugin 'scrooloose/nerdtree'
-    Plugin 'kien/ctrlp.vim' "fuzzy search files
-    Plugin 'majutsushi/tagbar'
-    Plugin 'mbbill/undotree'
-    "Plugin 'Lokaltog/vim-powerline'
-    Plugin 'bling/vim-airline'
-    Plugin 'sirver/ultisnips'
+    Plugin 'vim-latex/vim-latex'
+    "Plugin 'scrooloose/syntastic'
     Plugin 'scrooloose/nerdcommenter'
-    Plugin 'godlygeek/tabular'
+    Plugin 'easymotion/vim-easymotion'
+    Plugin 'myusuf3/numbers.vim'
     " plugin from http://vim-scripts.org/vim/scripts.html
     Plugin 'matchit.zip'
     " Git plugin not hosted on GitHub
-    Plugin 'git://git.wincent.com/command-t.git'
-    Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+    "Plugin 'git://git.wincent.com/command-t.git'
+    "Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
     " git repos on your local machine (i.e. when working on your own plugin)
-    "Plugin 'file:/Users/Jiahao/.vim/bundle/vim-latex'
     "Plugin 'file:///home/gmarik/path/to/plugin'
     " The sparkup vim script is in a subdirectory of this repo called vim.
     " Pass the path to set the runtimepath properly.
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+    "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}  "HTML related
     " Avoid a name conflict with L9
     "Plugin 'user/L9', {'name': 'newL9'}
 
@@ -77,12 +80,12 @@
     set history=1000                    " Store a ton of history (default is 20)
     set spell                           " Spell checking on
 
-"highlight the current line
-autocmd InsertLeave * se nocul
-autocmd InsertEnter * se cul
+""highlight the current line
+"autocmd InsertLeave * se nocul
+"autocmd InsertEnter * se cul
 
-"set the match time is one tenth second  
-set matchtime=1  
+""set the match time is one tenth second  
+"set matchtime=1  
 
 
 
@@ -94,10 +97,12 @@ set matchtime=1
     set showmode                    " Display the current mode
     set cursorline                  " Highlight current line
     set transparency=10             " Set windows transparency
-    set guifont=Source_Code_Pro_for_Powerline:h15       " Set the font
+    "set guifont=Source_Code_Pro_for_Powerline:h15       " Set the font
+    set guifont=Input_Mono_Narrow:h14
     set t_Co=256                    " Set the 256 color
     "let g:molokai_original = 1	"original monokai background color
     set hlsearch                    " Highlight search terms
+    set incsearch                   " Search when typing
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     set showmode                    " Display the current mode
     set confirm                     " Show confirm window when not saved
@@ -122,7 +127,8 @@ set matchtime=1
     set softtabstop=4               " Let backspace delete indent
     set splitright                  " Puts new vsplit windows to the right of the current
     set splitbelow                  " Puts new split windows to the bottom of the current
-	set number  					" Show the line number  
+    set number  					" Show the line number  
+    set relativenumber              " Show the relative number
 	set ruler						" Set show status on  
  
 " }
@@ -133,19 +139,38 @@ set matchtime=1
 	nmap <leader>nt :NERDTree<CR>
 	nmap <leader>cp :CtrlP<CR>
 	nmap <leader>tb :TagbarToggle<CR>	
+
 	nmap <space> za
 
+    imap jj <Esc>
+    vmap jj <Esc>
 	" Latex related {
-	map <f2> :w<cr><leader>ll
+	nmap <F2> :w<CR><Leader>ll
+    imap <F2> <ESC>:w<CR><Leader>ll
+    nmap <F3> <Leader>lv
+    imap <F3> <Leader>lv
 	imap <C-b> <Plug>Tex_MathBF
 	imap <C-c> <Plug>Tex_MathCal
 	imap <C-l> <Plug>Tex_LeftRight
 	imap <leader>it <Plug>Tex_InsertItemOnThisLine
     " }
 
+    " Undotree related {
+    nmap <leader>ut :UndotreeToggle<CR>
+    " }
+
+    " Tabular related {
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a& :Tabularize /&<CR>
+    vmap <Leader>a& :Tabularize /&<CR>
+    " }
 " }
 
 " Plugins {
+"
 
     " UltiSnips {
         " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -180,7 +205,7 @@ set matchtime=1
         "let g:airline_theme='solarized'
     " }
 
-	" Latex-suite {
+    " Latex-suite {
         " IMPORTANT: grep will sometimes skip displaying the file name if you
         " search in a singe file. This will confuse Latex-Suite. Set your grep
         " program to always generate a file-name.
@@ -192,15 +217,38 @@ set matchtime=1
         " Change default target to pdf, if not dvi is used
         let g:Tex_DefaultTargetFormat = 'pdf'
         " Setup the compile rule for pdf to use pdflatex with synctex enabled
-        let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*' 
-        " PDF display rule
-        let g:Tex_ViewRule_pdf = 'open -a Skim'	
-        set <m-i>=^[i
+"        let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
+        "let g:Tex_CompileRule_ps = 'dvips -Pwww -o $*.ps $*.dvi'
+        "let g:Tex_CompileRule_pspdf = 'ps2pdf $*.ps'
+        "let g:Tex_CompileRule_dvipdf = 'dvipdfm $*.dvi'
+        let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+        " PDF display rule 
+        let g:Tex_DefaultTargetFormat = 'pdf'
         " IMAP()
         "augroup MyIMAPs
             "au!
                "au VimEnter * call IMAP('NOM', '\nomenclature{<++>}<++>', 'tex')
         "augroup END
+ 
+         
+"        let g:Tex_ViewRule_dvi = 'texniscope'
+        "let g:Tex_ViewRule_ps = 'Preview'
+        "let g:Tex_ViewRule_pdf = 'Skim'
+         
+"        let g:Tex_FormatDependency_ps  = 'dvi,ps'
+        "let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
+        "let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
+    " }
+
+    " Syntastic {
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
     " }
 
 " }
