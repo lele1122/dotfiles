@@ -1,0 +1,20 @@
+
+# Setting PATH for Python 3.4
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+export PATH
+
+# Setting PATH for Python 2.7
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+export PATH
+
+# Initialization for FDK command line tools.Sat Oct 10 15:55:55 2015
+FDK_EXE="/Users/Jiahao/bin/FDK/Tools/osx"
+PATH=${PATH}:"/Users/Jiahao/bin/FDK/Tools/osx"
+
+export PATH
+export FDK_EXE
+
+# LaTeX
+export PATH="$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin"

@@ -135,6 +135,7 @@
 
 " Key (re)Mappings {
 	
+    set macmeta     "Enable alt or option as the mapping key
 	let mapleader=","
 	nmap <leader>nt :NERDTree<CR>
 	nmap <leader>cp :CtrlP<CR>
@@ -144,14 +145,15 @@
 
     imap jj <Esc>
     vmap jj <Esc>
+
 	" Latex related {
 	nmap <F2> :w<CR><Leader>ll
     imap <F2> <ESC>:w<CR><Leader>ll
     nmap <F3> <Leader>lv
     imap <F3> <Leader>lv
-	imap <C-b> <Plug>Tex_MathBF
-	imap <C-c> <Plug>Tex_MathCal
-	imap <C-l> <Plug>Tex_LeftRight
+   " imap <C-b> <Plug>Tex_MathBF
+	"imap <C-c> <Plug>Tex_MathCal
+	"imap <C-l> <Plug>Tex_LeftRight
 	imap <leader>it <Plug>Tex_InsertItemOnThisLine
     " }
 
