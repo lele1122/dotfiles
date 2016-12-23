@@ -23,7 +23,7 @@
     " plugin on GitHub repo
     Plugin 'kien/ctrlp.vim' "fuzzy search files
     Plugin 'mbbill/undotree'
-    Plugin 'sirver/ultisnips'
+    " Plugin 'sirver/ultisnips'   it seems to have bug to prevent vim from open
     Plugin 'majutsushi/tagbar'
     Plugin 'godlygeek/tabular'
     Plugin 'bling/vim-airline'
@@ -100,6 +100,7 @@
     "set guifont=Source_Code_Pro_for_Powerline:h15       " Set the font
     set guifont=Input_Mono_Narrow:h14
     set t_Co=256                    " Set the 256 color
+    colorscheme molokai
     "let g:molokai_original = 1	"original monokai background color
     set hlsearch                    " Highlight search terms
     set incsearch                   " Search when typing
@@ -144,7 +145,7 @@
 	nmap <space> za
 
     imap jj <Esc>
-    vmap jj <Esc>
+    "vmap jj <Esc>
 
 	" Latex related {
 	nmap <F2> :w<CR><Leader>ll
@@ -219,10 +220,10 @@
         " Change default target to pdf, if not dvi is used
         let g:Tex_DefaultTargetFormat = 'pdf'
         " Setup the compile rule for pdf to use pdflatex with synctex enabled
-"        let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
-        "let g:Tex_CompileRule_ps = 'dvips -Pwww -o $*.ps $*.dvi'
-        "let g:Tex_CompileRule_pspdf = 'ps2pdf $*.ps'
-        "let g:Tex_CompileRule_dvipdf = 'dvipdfm $*.dvi'
+        let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
+        let g:Tex_CompileRule_ps = 'dvips -Pwww -o $*.ps $*.dvi'
+        let g:Tex_CompileRule_pspdf = 'ps2pdf $*.ps'
+        let g:Tex_CompileRule_dvipdf = 'dvipdfm $*.dvi'
         let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
         " PDF display rule 
         let g:Tex_DefaultTargetFormat = 'pdf'
@@ -233,14 +234,17 @@
         "augroup END
  
          
-"        let g:Tex_ViewRule_dvi = 'texniscope'
-        "let g:Tex_ViewRule_ps = 'Preview'
-        "let g:Tex_ViewRule_pdf = 'Skim'
+        let g:Tex_ViewRule_dvi = 'texniscope'
+        let g:Tex_ViewRule_ps = 'Preview'
+        let g:Tex_ViewRule_pdf = 'Skim'
          
-"        let g:Tex_FormatDependency_ps  = 'dvi,ps'
-        "let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
-        "let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
-    " }
+        let g:Tex_FormatDependency_ps  = 'dvi,ps'
+        let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
+        let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
+
+"        autocmd FileType tex :NoMatchParen
+        "au FileType tex setlocal nocursorline
+        "}
 
     " Syntastic {
         set statusline+=%#warningmsg#
